@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cancer Awareness & Donations</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- Global Reset ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f8d7e5, #fdfdfd, #e2d9f3);
+      color: #333;
+      line-height: 1.6;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #d63384, #6f42c1);
+      color: #fff;
+      border-radius: 0 0 30px 30px;
+      animation: slideDown 1.2s ease-in-out;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      animation: glow 2s infinite alternate;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    /* Simple header navigation */
+    .main-nav {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .main-nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.6rem;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .main-nav a:hover { background: rgba(255,255,255,0.08); }
+
+    section {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      animation: fadeUp 1s ease-in-out;
+    }
+
+    section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #d63384;
+      text-align: center;
+      position: relative;
+    }
+
+    section h2::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #6f42c1;
+      margin: 0.5rem auto;
+      border-radius: 5px;
+      animation: expand 1.5s ease-in-out;
+    }
+
+    ul {
+      margin-left: 2rem;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .survivor {
+      background: #fff0f5;
+      padding: 1rem;
+      border-left: 5px solid #d63384;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .survivor:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(214,51,132,0.2);
+    }
+
+    .donation-tracker {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .progress-bar {
+      background: #e9ecef;
+      height: 25px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    .progress {
+      background: linear-gradient(90deg, #d63384, #6f42c1);
+      height: 100%;
+      width: 49%;
+      border-radius: 15px;
+      animation: progressFill 2.5s ease-in-out;
+    }
+
+    .gallery img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 15px;
+      margin: 1rem auto;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    .donate-button {
+      display: block;
+      width: fit-content;
+      margin: 2rem auto;
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, #d63384, #6f42c1);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 8px 20px rgba(214,51,132,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    /* Donate button group (mail client + Gmail) */
+    .donate-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .donate-alt {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      background: linear-gradient(135deg,#ff6f91,#d63384);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .donate-alt:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+
+    .donate-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(214,51,132,0.6);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+      background: #f1f1f1;
+      border-radius: 20px 20px 0 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* ---------- Animations ---------- */
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes slideDown {
+      from {transform: translateY(-50px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+
+    @keyframes fadeUp {
+      from {transform: translateY(40px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+
+    @keyframes expand {
+      from {width: 0;}
+      to {width: 80px;}
+    }
+
+    @keyframes progressFill {
+      from {width: 0;}
+      to {width: 49%;}
+    }
+
+    @keyframes glow {
+      from {text-shadow: 0 0 5px #fff, 0 0 10px #d63384;}
+      to {text-shadow: 0 0 15px #6f42c1, 0 0 30px #d63384;}
+    }
+
+    @keyframes pulse {
+      0%, 100% {transform: scale(1);}
+      50% {transform: scale(1.05);}
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      section {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Join the Fight Against Cancer</h1>
+    <p>Raise awareness. Support research. Save lives.</p>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="donator.html">Donators</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Why It Matters</h2>
+    <p>
+      Cancer affects millions of lives every year. Early detection, education, and funding for research are critical to saving lives. Your support can make a real difference.
+    </p>
+
+    <h2>How You Can Help</h2>
+    <ul>
+      <li>Share this page to spread awareness</li>
+      <li>Donate to trusted cancer research organizations</li>
+      <li>Support patients and survivors in your community</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Survivor Stories</h2>
+    <p>Real stories of courage and hope from those who’ve battled cancer.</p>
+    <div class="survivor">
+      <strong>Nathaniel, Breast Cancer Survivor:</strong>
+      <p>"Early detection saved my life. I’m now five years cancer-free and helping others find hope."</p>
+    </div>
+    <div class="survivor" style="border-left-color:#6f42c1;">
+      <strong>James, Childhood Leukemia Survivor:</strong>
+      <p>"Thanks to donations, I received treatment that gave me a second chance at life."</p>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <h2>Gallery</h2>
+    <p>Moments of strength, unity, and awareness.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Pink_ribbon.svg/1200px-Pink_ribbon.svg.png" alt="Pink Ribbon">
+    <img src="https://images.unsplash.com/photo-1588776814546-ec7d4c4b5b2e" alt="Cancer Awareness Walk">
+  </section>
+
+  <section>
+    <h2>Donation Tracker</h2>
+    <p>Every contribution counts. Together, we’re making progress.</p>
+    <div class="donation-tracker">
+        <p><strong>Total Raised:</strong> $2,450.00</p>
+      <p><strong>Goal:</strong> $5,000,000</p>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+        <p style="margin-top:0.6rem;color:#333;font-weight:600;">To donate please use any of the buttons below</p>
+
+<!-- Donate options: default mail client (mailto) + Gmail web compose -->
+<div class="donate-group">
+  <a class="donate-button"
+     href="mailto:allenstewart612@gmail.com?subject=I%20want%20to%20support%20Breast%20Cancer%20Awareness%20%F0%9F%92%96&body=Hello%2C%0A%0AI%20would%20like%20to%20make%20a%20donation%20to%20support%20breast%20cancer%20awareness.%0APlease%20provide%20me%20with%20the%20necessary%20details.%0A%0ABest%20regards%2C%0A%5BYour%20Name%5D">Open mail app</a>
+
+  <!-- Gmail compose URL: opens Gmail compose in a new tab with fields prefilled -->
+  <a class="donate-alt"
+     href="https://mail.google.com/mail/?view=cm&fs=1&to=allenstewart612@gmail.com&su=I%20want%20to%20support%20Breast%20Cancer%20Awareness%20%F0%9F%92%96&body=Hello%2C%0A%0AI%20would%20like%20to%20make%20a%20donation%20to%20support%20breast%20cancer%20awareness.%0APlease%20provide%20me%20with%20the%20necessary%20details.%0A%0ABest%20regards%2C%0A%5BYour%20Name%5D"
+     target="_blank" rel="noopener noreferrer">Compose in Gmail</a>
+</div>
+
+<p style="text-align:center;margin-top:0.5rem;font-size:0.95rem;color:#555;">If your device doesn't open an email app, please contact us at <a href="mailto:allenstewart612@gmail.com">allenstewart612@gmail.com</a>.</p>
+
+<footer>
+  <p>Contact us</p>
+  <ul style="list-style:none;padding-left:0;">
+    <li>Email : allenstewart612@gmail.com</li>
+  </ul>
+  &copy; 2025 Cancer Awareness Initiative
+</footer>
+<!-- No guest session or dashboard in this prototype. Donators are shown on a separate static page. -->
+</body>
+</html>
